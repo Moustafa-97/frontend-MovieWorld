@@ -32,7 +32,7 @@ export default function Watched() {
       Promise.all(
         watchred.map((id: any) =>
           axios
-            .post("http://localhost:8000/Watched", { IDs: id })
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Watched`, { IDs: id })
             .then((res) => {
               return res.data.thisMovie;
             })

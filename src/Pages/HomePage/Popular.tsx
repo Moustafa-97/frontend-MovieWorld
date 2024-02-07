@@ -19,7 +19,7 @@ export default function Popular() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8000/Popular", { page: page })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Popular`, { page: page })
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setMovies(res.data.movies.results);

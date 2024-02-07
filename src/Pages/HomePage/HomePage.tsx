@@ -35,7 +35,7 @@ export default function Discover() {
   // popular
   useEffect(() => {
     axios
-      .post("http://localhost:8000/Popular", { page: page })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Popular`, { page: page })
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setPopularMovies(res.data.movies.results);
@@ -46,7 +46,7 @@ export default function Discover() {
   // trending
   useEffect(() => {
     axios
-      .post("http://localhost:8000/Trending", { page: page })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Trending`, { page: page })
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setTrendingMovies(res.data.movies.results);

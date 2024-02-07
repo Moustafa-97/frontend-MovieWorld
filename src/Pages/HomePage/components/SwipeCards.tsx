@@ -60,7 +60,7 @@ export default function SwipeCards(props: unknown[] | any) {
   useEffect(() => {
     if (Object.keys(wishMovie).length !== 0 && logedUser) {
       axios
-        .put("http://localhost:8000/AddRemoveWish", {
+        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
           id: user?._id,
         })
@@ -77,7 +77,7 @@ export default function SwipeCards(props: unknown[] | any) {
   useEffect(() => {
     if (Object.keys(watchedMovie).length !== 0 && logedUser) {
       axios
-        .put("http://localhost:8000/AddRemoveWatch", {
+        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
           id: user?._id,
         })

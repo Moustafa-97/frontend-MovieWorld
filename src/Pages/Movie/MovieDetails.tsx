@@ -15,7 +15,7 @@ export default function MovieDetails() {
   // get movie details
   useEffect(() => {
     axios
-      .post("http://localhost:8000/Moviedetails", { id: theid })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Moviedetails `, { id: theid })
       .then((res) => setMovie(res.data.thisMovie))
       .catch((err) => console.log(err));
   }, []);
@@ -61,7 +61,7 @@ export default function MovieDetails() {
   useEffect(() => {
     if (Object.keys(wishMovie).length !== 0 && logedUser) {
       axios
-        .put("http://localhost:8000/AddRemoveWish", {
+        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
           id: user?._id,
         })
@@ -78,7 +78,7 @@ export default function MovieDetails() {
   useEffect(() => {
     if (Object.keys(watchedMovie).length !== 0 && logedUser) {
       axios
-        .put("http://localhost:8000/AddRemoveWatch", {
+        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
           id: user?._id,
         })

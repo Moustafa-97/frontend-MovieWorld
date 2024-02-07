@@ -26,7 +26,7 @@ export default function Wishlist() {
       Promise.all(
         wishred.map((id: any) =>
           axios
-            .post("http://localhost:8000/Wishlist", { IDs: id })
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Wishlist`, { IDs: id })
             .then((res) => {
               return res.data.thisMovie;
             })

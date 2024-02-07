@@ -83,7 +83,7 @@ export default function Signup() {
     if (firstName && lastName && email && password && confirmPassword) {
       if (password === confirmPassword) {
         axios
-          .post("http://localhost:8000/signup", { newUser: newUser })
+          .post(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, { newUser: newUser })
           .then((res) => setUserSignup(res))
           .catch((err) => console.log(err.response.data));
       } else {

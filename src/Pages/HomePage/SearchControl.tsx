@@ -1,14 +1,3 @@
-// nagaf 100---300
-// bastela 1850 lami3 abyad lon 30 genih (-10%) [2000 LE] -- 45m2
-// nadafet ceramic
-/**
- sala :: 6*4 --- area= 24 sq / paln 28 m
- oda :: 4*3.5 --- area = 14 / plan = 21
- oda :: 4*3.5 --- area = 14 / plan = 21
- oda :: 4*3.5 --- area = 14 / plan = 21
- safety :: area +5 plan +20
- total == 91+20 plan == 111
-*/
 import { useEffect, useState } from "react";
 import axios from "axios";
 // import required modules
@@ -29,7 +18,10 @@ export default function SearchControl() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8000/search", { page: page, search: search })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/search`, {
+        page: page,
+        search: search,
+      })
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setMovies(res.data.results);

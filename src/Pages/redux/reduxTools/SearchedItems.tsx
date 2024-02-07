@@ -13,7 +13,7 @@ interface TTTestState {
 }
 
 export const fetchUser = createAsyncThunk("/user/fetchUser", () => {
-  return axios.post("http://localhost:8000/login").then((resp) => resp.data);
+  return axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/login`).then((resp) => resp.data);
 });
 
 const TTTest = createSlice({

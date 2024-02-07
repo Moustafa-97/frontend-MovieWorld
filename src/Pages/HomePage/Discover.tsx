@@ -8,6 +8,11 @@ import "swiper/css/navigation";
 import SinglePage from "./components/SinglePage";
 import { useSelector } from "react-redux";
 
+declare var process : {
+  env: {
+    REACT_APP_SERVER_DOMAIN: string
+  }
+}
 export default function Discover() {
   // user login
   //   cookieeeeeeees
@@ -17,9 +22,10 @@ export default function Discover() {
   const [movies, setMovies] = useState(Array);
   const page = useSelector((state: any) => state.userlist.page);
 
+  
   useEffect(() => {
     axios
-      .post("http://localhost:8000/Discover", { page: page })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Discover`, { page: page })
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setMovies(res.data.movies.results);

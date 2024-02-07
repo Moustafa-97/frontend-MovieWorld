@@ -40,7 +40,7 @@ export default function Login() {
     if (email && password) {
       axios
         .post(
-          "http://localhost:8000/login",
+          `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
           { user: userLogin },
           // cookies::
           { withCredentials: true }
