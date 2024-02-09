@@ -43,7 +43,7 @@ export default function Login() {
           `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
           { user: userLogin },
           // cookies::
-          { withCredentials: true }
+          // { withCredentials: true }
         )
         .then(async (res: any) => {
           setLoginres(await res.data);

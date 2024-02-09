@@ -25,8 +25,6 @@ const WishlistandWatchlist = createSlice({
         let movieIndex = state.wishMovie?.findIndex(
           (i: any) => i === action.payload.id
         );
-
-        console.log(movieIndex);
         if (movieIndex >= 0) {
           // remove from array
           state.wishMovie.splice(movieIndex, 1);
