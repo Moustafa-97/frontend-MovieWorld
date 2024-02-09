@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, display, styled } from "@mui/system";
+import { Box, styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { Visibility } from "@mui/icons-material";
 import { VisibilityOff } from "@mui/icons-material";
@@ -8,9 +8,9 @@ import Button from "@mui/material/Button";
 import {
   Grid,
   OutlinedInput,
-  InputAdornment,
-  CssBaseline,
-  Tooltip,
+  // InputAdornment,
+  // CssBaseline,
+  // Tooltip,
   Avatar,
 } from "@mui/material";
 import Link from "@mui/material/Link";
@@ -18,23 +18,23 @@ import axios from "axios";
 import { imageToPage64 } from "../../assign/imagetopage64";
 import { useNavigate } from "react-router-dom";
 
-const Input = React.forwardRef(function CustomInput(
-  props: InputProps,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
-  const { slots, ...other } = props;
-  return (
-    <BaseInput
-      slots={{
-        root: InputRoot,
-        input: InputElement,
-        ...slots,
-      }}
-      {...other}
-      ref={ref}
-    />
-  );
-});
+// const Input = React.forwardRef(function CustomInput(
+//   props: InputProps,
+//   ref: React.ForwardedRef<HTMLDivElement>
+// ) {
+//   const { slots, ...other } = props;
+//   return (
+//     <BaseInput
+//       slots={{
+//         root: InputRoot,
+//         input: InputElement,
+//         ...slots,
+//       }}
+//       {...other}
+//       ref={ref}
+//     />
+//   );
+// });
 
 export default function Signup() {
   const navigate = useNavigate();
