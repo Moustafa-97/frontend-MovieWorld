@@ -300,7 +300,7 @@ export default function SinglePage(props: any) {
       </div>
       <div
         key={Math.random()}
-        className="flex items-center justify-center m-auto sm:gap-0 sm:hidden sm:overflow-hidden md:gap-8 mt-14 w-full"
+        className="lg:flex flex items-center justify-center m-auto pb-10 sm:gap-0 sm:hidden sm:overflow-hidden md:gap-8 mt-14 w-full"
       >
         <button
           key={Math.random()}

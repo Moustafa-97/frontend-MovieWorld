@@ -2,19 +2,14 @@ import React, {
   useCallback,
   useEffect,
   useState,
-  createContext,
-  useContext,
-  useRef,
 } from "react";
 import axios from "axios";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 // import required modules
-import { Autoplay, Scrollbar } from "swiper/modules";
 import { FaRegStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { DoneAll } from "@mui/icons-material";
@@ -139,7 +134,7 @@ export default function SearchPage(props: any) {
                         </p>
 
                         <p className=" text-xs font-light" key={Math.random()}>
-                          {movie.overview.slice(0, 60) + "..."}
+                          {/* {movie.overview.slice(0, 60) + "..."} */}
                         </p>
                         <p
                           className="absolute dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"

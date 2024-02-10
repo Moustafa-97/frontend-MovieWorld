@@ -41,7 +41,7 @@ export default function Login() {
       axios
         .post(
           `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
-          { user: userLogin },
+          { user: userLogin }
           // cookies::
           // { withCredentials: true }
         )
@@ -241,55 +241,55 @@ const grey = {
   900: "#1C2025",
 };
 
-const InputRoot = styled("div")(
-  ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 400;
-  border-radius: 5px;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[500]};
-  background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-  box-shadow: 0px 2px 4px ${
-    theme.palette.mode === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)"
-  };
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width:100%;
+// const InputRoot = styled("div")(
+//   ({ theme }) => `
+//   font-family: 'IBM Plex Sans', sans-serif;
+//   font-weight: 400;
+//   border-radius: 5px;
+//   color: ${theme.palette.mode === "dark" ? grey[300] : grey[500]};
+//   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+//   border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+//   box-shadow: 0px 2px 4px ${
+//     theme.palette.mode === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)"
+//   };
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width:100%;
 
-  &.${inputClasses.focused} {
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 0 ${
-      theme.palette.mode === "dark" ? blue[600] : blue[200]
-    };
-  }
- 
-  &:hover {
-    border-color: ${grey[800]};
-  }
+//   &.${inputClasses.focused} {
+//     border-color: ${blue[400]};
+//     box-shadow: 0 0 0 0 ${
+//       theme.palette.mode === "dark" ? blue[600] : blue[200]
+//     };
+//   }
 
-  // firefox
-  &:focus-visible {
-    outline: 0;
-  }
-`
-);
+//   &:hover {
+//     border-color: ${grey[800]};
+//   }
 
-const InputElement = styled("input")(
-  ({ theme }) => `
-  font-size: 0.875rem;
-  font-family: inherit;
-  font-weight: 400;
-  line-height: 1.5;
-  flex-grow: 1;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-  background: inherit;
-  border: none;
-  border-radius: inherit;
-  padding: 8px 12px;
-  outline: 0;
-`
-);
+//   // firefox
+//   &:focus-visible {
+//     outline: 0;
+//   }
+// `
+// );
+
+// const InputElement = styled("input")(
+//   ({ theme }) => `
+//   font-size: 0.875rem;
+//   font-family: inherit;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   flex-grow: 1;
+//   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+//   background: inherit;
+//   border: none;
+//   border-radius: inherit;
+//   padding: 8px 12px;
+//   outline: 0;
+// `
+// );
 
 const IconButton = styled(Button)(
   ({ theme }) => `

@@ -8,8 +8,8 @@ node_modules
 # testing
 coverage
 # production
-node_modules
-build
+node_modules/
+build/
 # misc
 .env
 

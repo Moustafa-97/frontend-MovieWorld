@@ -83,7 +83,9 @@ export default function Signup() {
     if (firstName && lastName && email && password && confirmPassword) {
       if (password === confirmPassword) {
         axios
-          .post(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, { newUser: newUser })
+          .post(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, {
+            newUser: newUser,
+          })
           .then((res) => setUserSignup(res))
           .catch((err) => console.log(err.response.data));
       } else {
@@ -350,21 +352,21 @@ const InputRoot = styled("div")(
 `
 );
 
-const InputElement = styled("input")(
-  ({ theme }) => `
-  font-size: 0.875rem;
-  font-family: inherit;
-  font-weight: 400;
-  line-height: 1.5;
-  flex-grow: 1;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-  background: inherit;
-  border: none;
-  border-radius: inherit;
-  padding: 8px 12px;
-  outline: 0;
-`
-);
+// const InputElement = styled("input")(
+//   ({ theme }) => `
+//   font-size: 0.875rem;
+//   font-family: inherit;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   flex-grow: 1;
+//   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+//   background: inherit;
+//   border: none;
+//   border-radius: inherit;
+//   padding: 8px 12px;
+//   outline: 0;
+// `
+// );
 
 const IconButton = styled(Button)(
   ({ theme }) => `
