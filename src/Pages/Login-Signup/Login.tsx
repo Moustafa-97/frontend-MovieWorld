@@ -42,11 +42,18 @@ export default function Login() {
         .post(
           `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
           { user: userLogin },
-          { withCredentials: true }
-          // cookies::
           // { withCredentials: true }
+          // cookies::
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            withCredentials: true,
+          }
         )
         .then(async (res: any) => {
+          console.log(res);
           setLoginres(await res.data);
           setSnackOpen(true);
         })
