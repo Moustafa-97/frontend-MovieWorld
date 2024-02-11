@@ -41,7 +41,8 @@ export default function Login() {
       axios
         .post(
           `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
-          { user: userLogin }
+          { user: userLogin },
+          { withCredentials: true }
           // cookies::
           // { withCredentials: true }
         )
