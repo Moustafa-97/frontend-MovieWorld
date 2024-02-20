@@ -14,7 +14,7 @@ import SearchControl from "./HomePage/SearchControl";
 export default function MainApp() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/MERN_movieworld">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
