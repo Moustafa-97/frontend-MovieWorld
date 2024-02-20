@@ -14,7 +14,7 @@ import SearchControl from "./HomePage/SearchControl";
 export default function MainApp() {
   return (
     <>
-      <BrowserRouter basename="/*">
+      <BrowserRouter basename="*">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
