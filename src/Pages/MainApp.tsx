@@ -15,7 +15,7 @@ export default function MainApp() {
   return (
     <>
       {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
-      <BrowserRouter basename={process.env.REACT_APP_SERVER_DOMAIN}>
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
