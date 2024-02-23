@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Login from "./Login-Signup/Login";
 import SignUp from "./Login-Signup/Signup";
@@ -14,7 +14,8 @@ import SearchControl from "./HomePage/SearchControl";
 export default function MainApp() {
   return (
     <>
-      <BrowserRouter>
+      {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
+      <BrowserRouter basename={process.env.REACT_APP_SERVER_DOMAIN}>
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -29,6 +30,7 @@ export default function MainApp() {
           <Route path="/Search" element={<SearchControl />} />
         </Routes>
       </BrowserRouter>
+      {/* </HashRouter> */}
     </>
   );
 }
