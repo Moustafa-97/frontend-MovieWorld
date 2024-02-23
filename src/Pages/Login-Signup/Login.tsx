@@ -208,16 +208,16 @@ export default function Login() {
             )}
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <Link
-                  href="/signup"
-                  variant="body2"
-                  sx={{
+                <p
+                  onClick={() => navigate("/signup")}
+                  // variant="body2"
+                  style={{
                     textDecoration: "none",
-                    ":hover": { fontWeight: "600" },
+                    // ":hover": { fontWeight: "600" },
                   }}
                 >
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </p>
               </Grid>
             </Grid>
           </Box>
