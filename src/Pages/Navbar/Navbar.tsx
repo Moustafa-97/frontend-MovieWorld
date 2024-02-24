@@ -283,6 +283,8 @@ export default function Navbar() {
                     onClick={() => {
                       if (setting === "logout") {
                         localStorage.removeItem("user");
+                        localStorage.removeItem("wishlist");
+                        localStorage.removeItem("watchedlist");
                       } else if (setting === `Watched ${WatchN}`) {
                         navigate("Watched");
                       } else if (setting === `Wishlist ${WishN}`) {
