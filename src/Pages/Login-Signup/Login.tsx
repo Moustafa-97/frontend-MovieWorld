@@ -209,7 +209,7 @@ export default function Login() {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Link
-                  onClick={() => navigate("/signup")}
+                  href="/signup"
                   variant="body2"
                   sx={{
                     textDecoration: "none",
