@@ -213,8 +213,8 @@ export default function Login() {
                   variant="body2"
                   sx={{
                     textDecoration: "none",
-                    // cursor: "pointer",
-                    // color: "blue",
+                    cursor: "pointer",
+                    color: "blue",
                     ":hover": { fontWeight: "600" },
                   }}
                 >
