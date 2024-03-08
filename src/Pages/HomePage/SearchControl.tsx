@@ -7,8 +7,8 @@ import SearchPage from "./components/SearchPage";
 export default function SearchControl() {
   // user login
   //   cookieeeeeeees
-  const localUser: any = localStorage.getItem("user");
-  const user = JSON.parse(localUser);
+  // const localUser: any = localStorage.getItem("user");
+  // const user = JSON.parse(localUser);
 
   const [movies, setMovies] = useState(Array);
   const page = useSelector((state: any) => state.userlist.page);

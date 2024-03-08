@@ -1,6 +1,4 @@
-import { PaletteMode } from "@mui/material";
-
-import { amber, deepOrange, grey, red } from "@mui/material/colors";
+import { amber, deepOrange, grey} from "@mui/material/colors";
 
 const mode = localStorage.getItem("mymode");
 console.log(mode);

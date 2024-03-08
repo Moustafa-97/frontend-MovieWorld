@@ -2,19 +2,13 @@ import React, {
   useCallback,
   useEffect,
   useState,
-  createContext,
-  useContext,
-  useRef,
 } from "react";
 import axios from "axios";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 // import required modules
-import { Autoplay, Scrollbar } from "swiper/modules";
 import { FaRegStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { DoneAll } from "@mui/icons-material";

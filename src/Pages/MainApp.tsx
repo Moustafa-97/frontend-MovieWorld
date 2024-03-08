@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
-import Navbar from "./Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login-Signup/Login";
 import SignUp from "./Login-Signup/Signup";
 import HomePage from "./HomePage/HomePage";
@@ -11,24 +10,26 @@ import Watched from "./HomePage/Watched";
 import Popular from "./HomePage/Popular";
 import TopMovies from "./HomePage/TopMovies";
 import SearchControl from "./HomePage/SearchControl";
+import Layout from "./Layout/Layout";
 export default function MainApp() {
   return (
     <>
       {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Discover" element={<Discover />} />
-          <Route path="/Popular" element={<Popular />} />
-          <Route path="/Top" element={<TopMovies />} />
-          <Route path="/Wishlist" element={<Wishlist />} />
-          <Route path="/Watched" element={<Watched />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/MovieDetails" element={<MovieDetails />} />
-          <Route path="/Search" element={<SearchControl />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/Discover" element={<Discover />} />
+            <Route path="/Popular" element={<Popular />} />
+            <Route path="/Top" element={<TopMovies />} />
+            <Route path="/Wishlist" element={<Wishlist />} />
+            <Route path="/Watched" element={<Watched />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/MovieDetails" element={<MovieDetails />} />
+            <Route path="/Search" element={<SearchControl />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
       {/* </HashRouter> */}
     </>

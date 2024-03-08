@@ -115,17 +115,17 @@ export default function SwipeCards(props: unknown[] | any) {
     >
       {props.movies &&
         props.movies.map((movie: String | Object | any) => (
-          <SwiperSlide className="bg-slate-900 pb-5 rounded-md">
+          <SwiperSlide className="dark:bg-black bg-slate-500 pb-5 rounded-md shadow-md">
             <div
               key={Math.random()}
-              className="container cont-item lg:w-full sm:w-full shadow-md rounded-md z-10"
+              className="container cont-item lg:w-full sm:w-full rounded-md z-10"
             >
               <div key={Math.random()}>
                 <div key={Math.random()} className="relative">
                   {/* card */}
                   <div
                     key={Math.random()}
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => {
                       localStorage.setItem("movieid", movie.id);
                       navigate("/MovieDetails");
@@ -143,19 +143,19 @@ export default function SwipeCards(props: unknown[] | any) {
                     {/* details */}
                     <div className="mt-3">
                       <p
-                        className="text-xl text-start ms-2 mb-2 font-bold whitespace-nowrap overflow-hidden w-[94%]"
+                        className="text-xl text-start text-slate-50 dark:text-slate-400 ms-2 mb-2 font-bold whitespace-nowrap overflow-hidden w-[94%]"
                         key={Math.random()}
                       >
-                        {movie.name? movie.name : movie.title}
+                        {movie.name ? movie.name : movie.title}
                       </p>
                       <p
-                        className=" text-xs font-light text-start ms-2"
+                        className=" text-xs font-light text-start ms-2 text-slate-50 dark:text-slate-400"
                         key={Math.random()}
                       >
                         {movie.overview.slice(0, 60) + "..."}
                       </p>
                       <p
-                        className="absolute dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
+                        className="absolute text-black dark:text-slate-300 dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
                         key={Math.random()}
                       >
                         <FaRegStar />
@@ -173,9 +173,9 @@ export default function SwipeCards(props: unknown[] | any) {
                       className={
                         user
                           ? inWatch?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-slate-500 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
+                            : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                          : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
                       }
                       onClick={() => {
                         handleWatchAddRemove(movie);
@@ -188,9 +188,9 @@ export default function SwipeCards(props: unknown[] | any) {
                       className={
                         user
                           ? inWish?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-slate-500 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
+                            : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                          : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
                       }
                       onClick={() => {
                         handleWishAddRemove(movie);

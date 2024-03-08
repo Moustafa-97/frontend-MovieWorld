@@ -111,7 +111,7 @@ export default function SinglePage(props: any) {
             delay: 3000,
             disableOnInteraction: false,
           }}
-          className="mySwiper h-10 bg-black"
+          className="mySwiper h-10 dark:bg-black bg-white"
           scrollbar={{
             hide: true,
           }}
@@ -135,7 +135,7 @@ export default function SinglePage(props: any) {
                     </div>
                     <div
                       key={Math.random()}
-                      className=" absolute text-white lg:w-1/2 sm:w-full lg:left-14 left-3 text-start  lg:bottom-14 bottom-4 "
+                      className=" absolute dark:text-white text-black lg:w-1/2 sm:w-full lg:left-14 left-3 text-start  lg:bottom-14 bottom-4 "
                     >
                       <h4
                         key={Math.random()}
@@ -186,14 +186,14 @@ export default function SinglePage(props: any) {
           props.movies.map((movie: any) => (
             <div
               key={Math.random()}
-              className="container cont-item lg:w-1/3 sm:w-full p-2 shadow-md rounded-md z-10"
+              className="container bg-slate-100 dark:bg-black cont-item lg:w-1/3 sm:w-full p-3 shadow-md rounded-md z-10"
             >
-              <div className="" key={Math.random()}>
+              <div key={Math.random()}>
                 <div key={Math.random()} className="relative">
                   {/* card */}
                   <div
                     key={Math.random()}
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                     onClick={() => {
                       localStorage.setItem("movieid", movie.id);
                       navigate("/MovieDetails");

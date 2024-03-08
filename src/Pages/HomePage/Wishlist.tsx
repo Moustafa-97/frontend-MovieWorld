@@ -11,8 +11,8 @@ import WishWatchPage from "./components/WishWatchPage";
 export default function Wishlist() {
   // user login
   //   cookieeeeeeees
-  const localUser: any = localStorage.getItem("user");
-  const user = JSON.parse(localUser);
+  // const localUser: any = localStorage.getItem("user");
+  // const user = JSON.parse(localUser);
 
   const [movies, setMovies] = useState(Array);
   const wishred = useSelector(

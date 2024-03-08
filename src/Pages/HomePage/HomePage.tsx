@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import axios from "axios";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,16 +15,14 @@ import SwiperCards from "./components/SwipeCards";
 // AOS ANIMATION
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useSelector, useDispatch } from "react-redux";
-import { json } from "node:stream/consumers";
 
 export default function Discover() {
   // AOS ANIMATION
   AOS.init();
 
   // user login
-  const localUser: any = localStorage.getItem("user");
-  const user = JSON.parse(localUser);
+  // const localUser: any = localStorage.getItem("user");
+  // const user = JSON.parse(localUser);
 
   const [popularMovies, setPopularMovies] = useState(Array);
   const [trendingMovies, setTrendingMovies] = useState(Array);

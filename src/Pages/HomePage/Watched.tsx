@@ -1,7 +1,4 @@
 import React, {
-  createContext,
-  useContext,
-  createRef,
   useEffect,
   useState,
 } from "react";
@@ -18,8 +15,8 @@ import { useSelector } from "react-redux";
 export default function Watched() {
   // user login
   //   cookieeeeeeees
-  const localUser: any = localStorage.getItem("user");
-  const user = JSON.parse(localUser);
+  // const localUser: any = localStorage.getItem("user");
+  // const user = JSON.parse(localUser);
 
   const [movies, setMovies] = useState(Array);
   const watchred = useSelector((state: unknown | any) => state.userlist.watchMovie);
