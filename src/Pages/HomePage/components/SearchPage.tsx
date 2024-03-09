@@ -1,8 +1,5 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 // Import Swiper React components
 // Import Swiper styles
@@ -18,6 +15,7 @@ import {
   AddRemoveMovieWatch,
   AddRemoveMovieWish,
 } from "../../redux/reduxTools/WishlistandWatchlist";
+import { Snackbar } from "@mui/material";
 
 export default function SearchPage(props: any) {
   const navigate = useNavigate();
@@ -58,42 +56,65 @@ export default function SearchPage(props: any) {
   }, []);
   const inWish = userWish?.map((Movieid: any) => Movieid);
   const inWatch = userWatch?.map((Movieid: any) => Movieid);
-  const logedUser: Object | null | any = localStorage.getItem("user");
+
+  const [wishWatchresp, setwishWatchresp] = useState(Object);
+  const [snackOpen, setSnackOpen] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(wishMovie).length !== 0 && logedUser) {
+    if (Object.keys(wishMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("wishlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
-
-      return;
     }
+    return;
   }, [wishMovie, click]);
 
   // watch
 
   useEffect(() => {
-    if (Object.keys(watchedMovie).length !== 0 && logedUser) {
+    if (Object.keys(watchedMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("watchedlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
-
+    }
+    return;
+  }, [watchedMovie, clickx]);
+  //  mui
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: String
+  ) => {
+    if (reason === "clickaway") {
       return;
     }
-  }, [watchedMovie, clickx]);
-
+    setSnackOpen(false);
+  };
   return (
     <>
       <div className="container absolute top-10 pb-20">
@@ -130,7 +151,7 @@ export default function SearchPage(props: any) {
                           className="text-xl font-bold whitespace-nowrap overflow-hidden w-[94%]"
                           key={Math.random()}
                         >
-                          {movie.name? movie.name : movie.title}
+                          {movie.name ? movie.name : movie.title}
                         </p>
 
                         <p className=" text-xs font-light" key={Math.random()}>
@@ -214,6 +235,15 @@ export default function SearchPage(props: any) {
             </div>
           )}
         </div>
+      </div>
+      <div key={Math.random()}>
+        <Snackbar
+          message={wishWatchresp.message}
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={snackOpen}
+          onClose={handleClose}
+        />
       </div>
     </>
   );

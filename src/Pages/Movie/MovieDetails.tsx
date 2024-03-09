@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { FaCalendar, FaRegStar } from "react-icons/fa";
@@ -7,6 +8,7 @@ import {
 } from "../redux/reduxTools/WishlistandWatchlist";
 import { useDispatch, useSelector } from "react-redux";
 import { DoneAll } from "@mui/icons-material";
+import { Snackbar } from "@mui/material";
 
 export default function MovieDetails() {
   const [movie, setMovie] = React.useState(Object);
@@ -15,7 +17,9 @@ export default function MovieDetails() {
   // get movie details
   useEffect(() => {
     axios
-      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Moviedetails `, { id: theid })
+      .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Moviedetails `, {
+        id: theid,
+      })
       .then((res) => setMovie(res.data.thisMovie))
       .catch((err) => console.log(err));
   }, []);
@@ -55,41 +59,65 @@ export default function MovieDetails() {
   }, []);
   const inWish = userWish?.map((Movieid: any) => Movieid);
   const inWatch = userWatch?.map((Movieid: any) => Movieid);
-  const logedUser: Object | null | any = localStorage.getItem("user");
 
-  // wishlist
+  const [wishWatchresp, setwishWatchresp] = useState(Object);
+  const [snackOpen, setSnackOpen] = useState(false);
+
   useEffect(() => {
-    if (Object.keys(wishMovie).length !== 0 && logedUser) {
+    if (Object.keys(wishMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("wishlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
-
-      return;
     }
+    return;
   }, [wishMovie, click]);
 
-  // watched
+  // watch
+
   useEffect(() => {
-    if (Object.keys(watchedMovie).length !== 0 && logedUser) {
+    if (Object.keys(watchedMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("watchedlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
-
+    }
+    return;
+  }, [watchedMovie, clickx]);
+  //  mui
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: String
+  ) => {
+    if (reason === "clickaway") {
       return;
     }
-  }, [watchedMovie, clickx]);
+    setSnackOpen(false);
+  };
 
   return (
     <>
@@ -175,6 +203,15 @@ export default function MovieDetails() {
             className="rounded-md shadow-xl object-cover "
           />
         </div>
+      </div>
+      <div key={Math.random()}>
+        <Snackbar
+          message={wishWatchresp.message}
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={snackOpen}
+          onClose={handleClose}
+        />
       </div>
     </>
   );

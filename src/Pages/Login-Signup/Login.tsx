@@ -4,6 +4,7 @@ import { Box, styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { Visibility } from "@mui/icons-material";
 import { VisibilityOff } from "@mui/icons-material";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Input as BaseInput, InputProps, inputClasses } from "@mui/base/Input";
 import Button from "@mui/material/Button";
 import { Grid, OutlinedInput, Snackbar } from "@mui/material";
@@ -229,15 +230,6 @@ export default function Login() {
     </>
   );
 }
-
-const blue = {
-  100: "#DAECFF",
-  200: "#80BFFF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-  700: "#0059B2",
-};
 
 const grey = {
   50: "#F3F6F9",

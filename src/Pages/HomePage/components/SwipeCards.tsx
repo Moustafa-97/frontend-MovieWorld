@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -62,10 +63,13 @@ export default function SwipeCards(props: unknown[] | any) {
   useEffect(() => {
     if (Object.keys(wishMovie).length !== 0) {
       axios
-        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
-          wishMovie: wishMovie,
-          id: user?._id,
-        })
+        .put(
+          `${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`,
+          {
+            wishMovie: wishMovie,
+            id: user?._id,
+          },
+        )
         .then((res) => {
           if (res.data.state) {
             localStorage.setItem("user", JSON.stringify(res.data.data));

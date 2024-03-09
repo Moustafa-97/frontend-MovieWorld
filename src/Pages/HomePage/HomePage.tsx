@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
-// import required modules
-import { Autoplay, Scrollbar } from "swiper/modules";
-
 // components
 import SwiperCards from "./components/SwipeCards";
-
 // AOS ANIMATION
 import AOS from "aos";
 import "aos/dist/aos.css";
