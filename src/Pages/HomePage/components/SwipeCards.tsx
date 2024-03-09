@@ -17,11 +17,11 @@ import {
   AddRemoveMovieWish,
 } from "../../redux/reduxTools/WishlistandWatchlist";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Snackbar } from "@mui/material";
 export default function SwipeCards(props: unknown[] | any) {
   const navigate = useNavigate();
 
-  // user login
+  // user wishWatch
   //   cookieeeeeeees
   const localUser: any = localStorage.getItem("user");
   const user = JSON.parse(localUser);
@@ -55,17 +55,26 @@ export default function SwipeCards(props: unknown[] | any) {
   }, []);
   const inWish = userWish?.map((Movieid: any) => Movieid);
   const inWatch = userWatch?.map((Movieid: any) => Movieid);
-  const logedUser: Object | null | any = localStorage.getItem("user");
+
+  const [wishWatchresp, setwishWatchresp] = useState(Object);
+  const [snackOpen, setSnackOpen] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(wishMovie).length !== 0 && logedUser) {
+    if (Object.keys(wishMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("wishlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -75,135 +84,166 @@ export default function SwipeCards(props: unknown[] | any) {
   // watch
 
   useEffect(() => {
-    if (Object.keys(watchedMovie).length !== 0 && logedUser) {
+    if (Object.keys(watchedMovie).length !== 0) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
           id: user?._id,
         })
         .then((res) => {
-          localStorage.setItem("watchedlist", JSON.stringify(res.data.data));
+          if (res.data.state) {
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          } else {
+            setwishWatchresp(res.data);
+            setSnackOpen(true);
+          }
         })
         .catch((err) => console.log(err));
     }
     return;
   }, [watchedMovie, clickx]);
+  //  mui
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: String
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackOpen(false);
+  };
 
   return (
-    <Swiper
-      breakpoints={{
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 1,
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 2,
-        },
-        1024: {
-          slidesPerView: 5,
-          spaceBetween: 5,
-        },
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      navigation
-      modules={[Navigation, Pagination]}
-      className="mySwiper "
-      loop
-    >
-      {props.movies &&
-        props.movies.map((movie: String | Object | any) => (
-          <SwiperSlide className="dark:bg-black bg-slate-500 pb-5 rounded-md shadow-md">
-            <div
-              key={Math.random()}
-              className="container cont-item lg:w-full sm:w-full rounded-md z-10"
-            >
-              <div key={Math.random()}>
-                <div key={Math.random()} className="relative">
-                  {/* card */}
-                  <div
-                    key={Math.random()}
-                    className="cursor-pointer"
-                    onClick={() => {
-                      localStorage.setItem("movieid", movie.id);
-                      navigate("/MovieDetails");
-                    }}
-                  >
-                    {/* img */}
-                    <div key={Math.random()} className=" relative">
-                      <img
+    <>
+      <div key={Math.random()}>
+        <Swiper
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 1,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 2,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 5,
+            },
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation
+          modules={[Navigation, Pagination]}
+          className="mySwiper "
+          loop
+          key={Math.random()}
+        >
+          {props.movies &&
+            props.movies.map((movie: String | Object | any) => (
+              <SwiperSlide className="dark:bg-black bg-slate-500 pb-5 rounded-md shadow-md">
+                <div
+                  key={Math.random()}
+                  className="container cont-item lg:w-full sm:w-full rounded-md z-10"
+                >
+                  <div key={Math.random()}>
+                    <div key={Math.random()} className="relative">
+                      {/* card */}
+                      <div
                         key={Math.random()}
-                        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                        alt="movie"
-                        className="rounded-md shadow-xl object-cover "
-                      />
+                        className="cursor-pointer"
+                        onClick={() => {
+                          localStorage.setItem("movieid", movie.id);
+                          navigate("/MovieDetails");
+                        }}
+                      >
+                        {/* img */}
+                        <div key={Math.random()} className=" relative">
+                          <img
+                            key={Math.random()}
+                            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                            alt="movie"
+                            className="rounded-md shadow-xl object-cover "
+                          />
+                        </div>
+                        {/* details */}
+                        <div className="mt-3">
+                          <p
+                            className="text-xl text-start text-slate-50 dark:text-slate-400 ms-2 mb-2 font-bold whitespace-nowrap overflow-hidden w-[94%]"
+                            key={Math.random()}
+                          >
+                            {movie.name ? movie.name : movie.title}
+                          </p>
+                          <p
+                            className=" text-xs font-light text-start ms-2 text-slate-50 dark:text-slate-400"
+                            key={Math.random()}
+                          >
+                            {movie.overview.slice(0, 60) + "..."}
+                          </p>
+                          <p
+                            className="absolute text-black dark:text-slate-300 dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
+                            key={Math.random()}
+                          >
+                            <FaRegStar />
+                            {movie.vote_average}
+                          </p>
+                        </div>
+                      </div>
+                      {/* buttons */}
+                      <div
+                        key={Math.random()}
+                        className="absolute top-2 right-2 z-[50px]"
+                      >
+                        <button
+                          key={Math.random()}
+                          className={
+                            user
+                              ? inWatch?.includes(movie.id)
+                                ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
+                                : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                              : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                          }
+                          onClick={() => {
+                            handleWatchAddRemove(movie);
+                          }}
+                        >
+                          <DoneAll fontSize="small" />
+                        </button>
+                        <button
+                          key={Math.random()}
+                          className={
+                            user
+                              ? inWish?.includes(movie.id)
+                                ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
+                                : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                              : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
+                          }
+                          onClick={() => {
+                            handleWishAddRemove(movie);
+                          }}
+                        >
+                          <FaRegStar />
+                        </button>
+                      </div>
                     </div>
-                    {/* details */}
-                    <div className="mt-3">
-                      <p
-                        className="text-xl text-start text-slate-50 dark:text-slate-400 ms-2 mb-2 font-bold whitespace-nowrap overflow-hidden w-[94%]"
-                        key={Math.random()}
-                      >
-                        {movie.name ? movie.name : movie.title}
-                      </p>
-                      <p
-                        className=" text-xs font-light text-start ms-2 text-slate-50 dark:text-slate-400"
-                        key={Math.random()}
-                      >
-                        {movie.overview.slice(0, 60) + "..."}
-                      </p>
-                      <p
-                        className="absolute text-black dark:text-slate-300 dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
-                        key={Math.random()}
-                      >
-                        <FaRegStar />
-                        {movie.vote_average}
-                      </p>
-                    </div>
-                  </div>
-                  {/* buttons */}
-                  <div
-                    key={Math.random()}
-                    className="absolute top-2 right-2 z-[50px]"
-                  >
-                    <button
-                      key={Math.random()}
-                      className={
-                        user
-                          ? inWatch?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                      }
-                      onClick={() => {
-                        handleWatchAddRemove(movie);
-                      }}
-                    >
-                      <DoneAll fontSize="small" />
-                    </button>
-                    <button
-                      key={Math.random()}
-                      className={
-                        user
-                          ? inWish?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-yellow-200 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] text-black dark:text-slate-300 dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                      }
-                      onClick={() => {
-                        handleWishAddRemove(movie);
-                      }}
-                    >
-                      <FaRegStar />
-                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-    </Swiper>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </div>
+      <div key={Math.random()}>
+        <Snackbar
+          message={wishWatchresp.message}
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={snackOpen}
+          onClose={handleClose}
+        />
+      </div>
+    </>
   );
 }

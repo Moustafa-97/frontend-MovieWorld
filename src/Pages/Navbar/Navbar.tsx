@@ -20,7 +20,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
 // import { alpha } from "@mui/system";
 import { InputBase } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Logout } from "../redux/reduxTools/WishlistandWatchlist";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,7 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // MUI
   const { mode, toggleColorMode } = useThemeContext();
   localStorage.setItem("theme", JSON.stringify(mode));
@@ -113,10 +114,14 @@ export default function Navbar() {
     localStorage.setItem("search", JSON.stringify(search));
     navigate("Search");
   };
+  const handleLogout = (e: any) => {
+    localStorage.removeItem("user");
+    dispatch(Logout(e));
+  };
 
   return (
     <AppBar
-      position="absolute"
+      position="fixed"
       sx={{ background: "linear-gradient(180deg, #000, #0000003a)" }}
     >
       <Container maxWidth="xl">
@@ -280,11 +285,10 @@ export default function Navbar() {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography
                     textAlign="center"
-                    onClick={() => {
+                    onClick={(e:any) => {
                       if (setting === "logout") {
-                        localStorage.removeItem("user");
-                        localStorage.removeItem("wishlist");
-                        localStorage.removeItem("watchedlist");
+                        handleLogout(e)
+                        // localStorage.removeItem("user");
                       } else if (setting === `Watched ${WatchN}`) {
                         navigate("Watched");
                       } else if (setting === `Wishlist ${WishN}`) {

@@ -1,18 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const wishlist: Array<Object> | null | any = localStorage.getItem("wishlist");
-const parsedWishlist: any = JSON.parse(wishlist);
-const watchlist: Array<Object> | null | any = localStorage.getItem(
-  "watchedlist"
-);
-const parsedWatchlist: any = JSON.parse(watchlist);
+const User: Object | null | any = localStorage.getItem("user");
+const parsedWishlist: any = JSON.parse(User);
+const parsedWatchlist: any = JSON.parse(User);
 
 const initialState = {
   loged: false,
-  wishMovie: wishlist ? parsedWishlist : [],
-  wishnumber: wishlist ? parsedWishlist?.length : 0,
-  watchMovie: watchlist ? parsedWatchlist : [],
-  watchnumber: watchlist ? parsedWatchlist?.length : 0,
+  wishMovie: User ? parsedWishlist.wishlist : [],
+  wishnumber: User ? parsedWishlist.wishlist?.length : 0,
+  watchMovie: User ? parsedWatchlist.watched : [],
+  watchnumber: User ? parsedWatchlist.watched?.length : 0,
   message: "please login",
   page: 1,
 };
@@ -62,11 +59,19 @@ const WishlistandWatchlist = createSlice({
     RefreshPage: (state, action) => {
       state.page = action.payload;
     },
+    Logout: (state, action) => {
+      state.watchnumber = 0;
+      state.wishnumber = 0;
+      state.watchMovie = [];
+      state.wishMovie = [];
+    },
   },
 });
 export const {
   AddRemoveMovieWish,
   AddRemoveMovieWatch,
   RefreshPage,
+  Logout,
 } = WishlistandWatchlist.actions;
+
 export default WishlistandWatchlist.reducer;

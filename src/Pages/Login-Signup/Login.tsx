@@ -66,7 +66,7 @@ export default function Login() {
     if (loginresp.status) {
       localStorage.setItem("user", JSON.stringify(loginresp.user));
       setTimeout(() => {
-        navigate("/");
+        navigate("/", { replace: true });
       }, 2000);
     }
   }, [loginresp]);
