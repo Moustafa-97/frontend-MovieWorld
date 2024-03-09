@@ -17,6 +17,12 @@ const WishlistandWatchlist = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
+    LoginHandler: (state, action) => {
+      state.watchMovie = action.payload.data.user.watched;
+      state.wishMovie = action.payload.data.user.wishlist;
+      state.watchnumber = action.payload.data.user.wishlist?.length;
+      state.wishnumber = action.payload.data.user.wishlist?.length;
+    },
     AddRemoveMovieWish: (state, action) => {
       if (!state.loged) {
         let movieIndex = state.wishMovie?.findIndex(
@@ -41,7 +47,6 @@ const WishlistandWatchlist = createSlice({
         let movieIndex = state.watchMovie?.findIndex(
           (i: any) => i === action.payload.id
         );
-
         if (movieIndex >= 0) {
           // remove the movie from the array
           state.watchMovie.splice(movieIndex, 1);
@@ -72,6 +77,7 @@ export const {
   AddRemoveMovieWatch,
   RefreshPage,
   Logout,
+  LoginHandler,
 } = WishlistandWatchlist.actions;
 
 export default WishlistandWatchlist.reducer;

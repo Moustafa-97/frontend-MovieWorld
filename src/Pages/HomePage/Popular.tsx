@@ -9,11 +9,6 @@ import SinglePage from "./components/SinglePage";
 import { useSelector } from "react-redux";
 
 export default function Popular() {
-  // user login
-  //   cookieeeeeeees
-  // const localUser: any = localStorage.getItem("user");
-  // const user = JSON.parse(localUser);
-
   const [movies, setMovies] = useState(Array);
   const page = useSelector((state: any) => state.userlist.page);
 

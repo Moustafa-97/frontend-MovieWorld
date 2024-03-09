@@ -10,9 +10,12 @@ import { Grid, OutlinedInput, Snackbar } from "@mui/material";
 import Link from "@mui/material/Link";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LoginHandler } from "../redux/reduxTools/WishlistandWatchlist";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [userLogin, setUserLogin] = useState<{
     email: string;
@@ -53,7 +56,7 @@ export default function Login() {
           }
         )
         .then(async (res: any) => {
-          console.log(res);
+          dispatch(LoginHandler(res))
           setLoginres(await res.data);
           setSnackOpen(true);
         })

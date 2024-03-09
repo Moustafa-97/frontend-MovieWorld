@@ -9,22 +9,17 @@ import "swiper/css/navigation";
 import WishWatchPage from "./components/WishWatchPage";
 
 export default function Wishlist() {
-  // user login
-  //   cookieeeeeeees
-  // const localUser: any = localStorage.getItem("user");
-  // const user = JSON.parse(localUser);
-
   const [movies, setMovies] = useState(Array);
-  const wishred = useSelector(
+  const wished = useSelector(
     (state: unknown | any) => state.userlist.wishMovie
   );
 
   useEffect(() => {
     const controler = new AbortController();
     const { signal } = controler;
-    if (wishred) {
+    if (wished) {
       Promise.all(
-        wishred.map((id: any) =>
+        wished.map((id: any) =>
           axios
             .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Wishlist`, { IDs: id })
             .then((res) => {
@@ -42,7 +37,7 @@ export default function Wishlist() {
     return () => {
       controler.abort();
     };
-  }, [wishred]);
+  }, [wished]);
 
   return (
     <>
