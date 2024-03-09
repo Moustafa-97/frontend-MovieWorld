@@ -20,7 +20,7 @@ const WishlistandWatchlist = createSlice({
     LoginHandler: (state, action) => {
       state.watchMovie = action.payload.data.user.watched;
       state.wishMovie = action.payload.data.user.wishlist;
-      state.watchnumber = action.payload.data.user.wishlist?.length;
+      state.watchnumber = action.payload.data.user.watched?.length;
       state.wishnumber = action.payload.data.user.wishlist?.length;
     },
     AddRemoveMovieWish: (state, action) => {
