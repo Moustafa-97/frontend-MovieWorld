@@ -285,9 +285,9 @@ export default function Navbar() {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography
                     textAlign="center"
-                    onClick={(e:any) => {
+                    onClick={(e: any) => {
                       if (setting === "logout") {
-                        handleLogout(e)
+                        handleLogout(e);
                         // localStorage.removeItem("user");
                       } else if (setting === `Watched ${WatchN}`) {
                         navigate("Watched");
