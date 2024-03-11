@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaCalendar, FaRegStar } from "react-icons/fa";
 import {
@@ -12,13 +13,14 @@ import { Snackbar } from "@mui/material";
 
 export default function MovieDetails() {
   const [movie, setMovie] = React.useState(Object);
-  const test: String | Number | null | any = localStorage.getItem("movieid");
-  const theid = JSON.parse(test);
+  const id = useParams();
+  // const test: String | Number | null | any = localStorage.getItem("movieid");
+  // const theid = JSON.parse(test);
   // get movie details
   useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Moviedetails `, {
-        id: theid,
+        id: id.id,
       })
       .then((res) => setMovie(res.data.thisMovie))
       .catch((err) => console.log(err));

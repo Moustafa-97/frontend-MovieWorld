@@ -1,8 +1,6 @@
 import { amber, deepOrange, grey} from "@mui/material/colors";
 
 const mode = localStorage.getItem("mymode");
-console.log(mode);
-
 const theme = {
   palette: {
     ...(mode === 'light'

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/scrollbar";
@@ -13,113 +12,18 @@ import {
   MdOutlineSkipPrevious,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { DoneAll } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AddRemoveMovieWatch,
-  AddRemoveMovieWish,
-  RefreshPage,
-} from "../../redux/reduxTools/WishlistandWatchlist";
+import { RefreshPage } from "../../redux/reduxTools/WishlistandWatchlist";
 import ScreenSwiper from "./ScreenSwiper";
-import { Snackbar } from "@mui/material";
+import WishAndWatchBtn from "./buttons/WishAndWatchBtn";
+import SnackbarSection from "./snackbar/SnackbarSection";
 
 export default function SinglePage(props: any) {
   const navigate = useNavigate();
-  //   cookieeeeeeees
-  const localUser: any = localStorage.getItem("user");
-  const user = JSON.parse(localUser);
 
   const page = useSelector((state: any) => state.userlist.page);
 
-  const [wishMovie, setWishMovie] = useState(Object);
-  const [watchedMovie, setWatchedMovie] = useState(Object);
-
-  const [click, setClick] = useState(false);
-  const [clickx, setClickx] = useState(false);
-  // redux
-  const userWish = useSelector(
-    (state: unknown | any) => state.userlist.wishMovie
-  );
-  const userWatch = useSelector(
-    (state: unknown | any) => state.userlist.watchMovie
-  );
   const dispatch = useDispatch();
-
-  const handleWishAddRemove = useCallback((movie: Object | any) => {
-    setWishMovie(movie);
-    setClick((pre) => !pre);
-    dispatch(AddRemoveMovieWish(movie));
-
-    return;
-  }, []);
-  const handleWatchAddRemove = useCallback((moviex: Object | any) => {
-    setWatchedMovie(moviex);
-    setClickx((pre) => !pre);
-    dispatch(AddRemoveMovieWatch(moviex));
-
-    return;
-  }, []);
-  const inWish = userWish?.map((Movieid: any) => Movieid);
-  const inWatch = userWatch?.map((Movieid: any) => Movieid);
-
-  const [wishWatchresp, setwishWatchresp] = useState(Object);
-  const [snackOpen, setSnackOpen] = useState(false);
-
-  useEffect(() => {
-    if (Object.keys(wishMovie).length !== 0) {
-      axios
-        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
-          wishMovie: wishMovie,
-          id: user?._id,
-        })
-        .then((res) => {
-          if (res.data.state) {
-            localStorage.setItem("user", JSON.stringify(res.data.data));
-            setwishWatchresp(res.data);
-            setSnackOpen(true);
-          } else {
-            setwishWatchresp(res.data);
-            setSnackOpen(true);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-    return;
-  }, [wishMovie, click]);
-
-  // watch
-
-  useEffect(() => {
-    if (Object.keys(watchedMovie).length !== 0) {
-      axios
-        .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
-          watchedMovie: watchedMovie,
-          id: user?._id,
-        })
-        .then((res) => {
-          if (res.data.state) {
-            localStorage.setItem("user", JSON.stringify(res.data.data));
-            setwishWatchresp(res.data);
-            setSnackOpen(true);
-          } else {
-            setwishWatchresp(res.data);
-            setSnackOpen(true);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-    return;
-  }, [watchedMovie, clickx]);
-  //  mui
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: String
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackOpen(false);
-  };
 
   return (
     <>
@@ -140,8 +44,7 @@ export default function SinglePage(props: any) {
                     key={Math.random()}
                     className="cursor-pointer"
                     onClick={() => {
-                      localStorage.setItem("movieid", movie.id);
-                      navigate("/MovieDetails");
+                      navigate(`/MovieDetails/${movie.id}`);
                     }}
                   >
                     {/* img */}
@@ -175,41 +78,7 @@ export default function SinglePage(props: any) {
                     </div>
                   </div>
                   {/* buttons */}
-                  <div
-                    key={Math.random()}
-                    className="absolute top-2 right-2 z-[50px]"
-                  >
-                    <button
-                      key={Math.random()}
-                      className={
-                        user
-                          ? inWatch?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-slate-500 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                      }
-                      onClick={() => {
-                        handleWatchAddRemove(movie);
-                      }}
-                    >
-                      <DoneAll fontSize="small" />
-                    </button>
-                    <button
-                      key={Math.random()}
-                      className={
-                        user
-                          ? inWish?.includes(movie.id)
-                            ? "z-[5000px] rounded-[50%] dark:bg-yellow-200 bg-slate-500 px-2 py-1 text-2xl text-center m-auto mr-2"
-                            : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                          : " z-[5000px] rounded-[50%] dark:bg-black bg-white px-2 py-1 text-2xl text-center m-auto mr-2"
-                      }
-                      onClick={() => {
-                        handleWishAddRemove(movie);
-                      }}
-                    >
-                      <FaRegStar />
-                    </button>
-                  </div>
+                  <WishAndWatchBtn movie={movie} />
                 </div>
               </div>
             </div>
@@ -311,15 +180,7 @@ export default function SinglePage(props: any) {
           <MdLastPage />
         </button>
       </div>
-      <div key={Math.random()}>
-        <Snackbar
-          message={wishWatchresp.message}
-          autoHideDuration={2000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={snackOpen}
-          onClose={handleClose}
-        />
-      </div>
+      <SnackbarSection />
     </>
   );
 }

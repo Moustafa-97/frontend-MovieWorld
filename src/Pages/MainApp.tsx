@@ -14,7 +14,6 @@ import Layout from "./Layout/Layout";
 export default function MainApp() {
   return (
     <>
-      {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -26,12 +25,11 @@ export default function MainApp() {
             <Route path="/Watched" element={<Watched />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/MovieDetails" element={<MovieDetails />} />
-            <Route path="/Search" element={<SearchControl />} />
+            <Route path="/MovieDetails/:id" element={<MovieDetails />} />
+            <Route path="/Search/:search" element={<SearchControl />} />
           </Routes>
         </Layout>
       </BrowserRouter>
-      {/* </HashRouter> */}
     </>
   );
 }

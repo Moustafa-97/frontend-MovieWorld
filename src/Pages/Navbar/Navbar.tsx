@@ -111,8 +111,7 @@ export default function Navbar() {
   const logedUser = JSON.parse(localUser);
   const [search, setSearch] = useState(String);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    localStorage.setItem("search", JSON.stringify(search));
-    navigate("Search");
+    navigate(`Search/${search}`);
   };
   const handleLogout = (e: any) => {
     localStorage.removeItem("user");
@@ -312,7 +311,6 @@ export default function Navbar() {
                   justifyContent: "center",
                   padding: "5px",
                   margin: "a",
-                  // fontSize:"20px"
                 }}
               >
                 {mode}

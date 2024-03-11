@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import WishlistandWatchlist from "../reduxTools/WishlistandWatchlist";
-// import TTTest from "../reduxTools/SearchedItems"
-// import TTTest from "../reduxTools/SearchedItems";
+import SnackbarHandler from "../reduxTools/SnackbarHandler";
+
 export default configureStore({
   reducer: {
     userlist: WishlistandWatchlist,
-    // test: TTTest,
+    snackbar: SnackbarHandler,
   },
 });
