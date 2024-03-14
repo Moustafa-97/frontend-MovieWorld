@@ -17,6 +17,7 @@ import { RefreshPage } from "../../redux/reduxTools/WishlistandWatchlist";
 import ScreenSwiper from "./ScreenSwiper";
 import WishAndWatchBtn from "./buttons/WishAndWatchBtn";
 import SnackbarSection from "./snackbar/SnackbarSection";
+import Card from "./card/Card";
 
 export default function SinglePage(props: any) {
   const navigate = useNavigate();
@@ -39,46 +40,7 @@ export default function SinglePage(props: any) {
             >
               <div key={Math.random()}>
                 <div key={Math.random()} className="relative">
-                  {/* card */}
-                  <div
-                    key={Math.random()}
-                    className="cursor-pointer"
-                    onClick={() => {
-                      navigate(`/MovieDetails/${movie.id}`);
-                    }}
-                  >
-                    {/* img */}
-                    <div key={Math.random()} className=" relative">
-                      <img
-                        key={Math.random()}
-                        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                        alt="movie"
-                        className="rounded-md shadow-xl object-cover "
-                      />
-                    </div>
-                    {/* details */}
-                    <div>
-                      <p
-                        className="text-xl font-bold whitespace-nowrap overflow-hidden w-[94%]"
-                        key={Math.random()}
-                      >
-                        {movie.title}
-                      </p>
-
-                      <p className=" text-xs font-light" key={Math.random()}>
-                        {movie.overview.slice(0, 60) + "..."}
-                      </p>
-                      <p
-                        className="absolute dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
-                        key={Math.random()}
-                      >
-                        <FaRegStar />
-                        {movie.vote_average}
-                      </p>
-                    </div>
-                  </div>
-                  {/* buttons */}
-                  <WishAndWatchBtn movie={movie} />
+                 <Card movie={movie}/>
                 </div>
               </div>
             </div>

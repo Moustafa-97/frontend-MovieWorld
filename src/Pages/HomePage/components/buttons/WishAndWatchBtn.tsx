@@ -4,11 +4,8 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaRegStar } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  AddRemoveMovieWish,
-  AddRemoveMovieWatch,
-} from "../../../redux/reduxTools/WishlistandWatchlist";
 import { setMessage, setOpen } from "../../../redux/reduxTools/SnackbarHandler";
+import { userData } from "../../../redux/reduxTools/HandleUserLogin";
 export default function WishAndWatchBtn(props: any) {
   const localUser: any = localStorage.getItem("user");
   const user = JSON.parse(localUser);
@@ -19,24 +16,23 @@ export default function WishAndWatchBtn(props: any) {
   const [clickx, setClickx] = useState(false);
   // redux
   const userWish = useSelector(
-    (state: unknown | any) => state.userlist.wishMovie
+    (state: unknown | any) => state.Login.user.wishlist
   );
   const userWatch = useSelector(
-    (state: unknown | any) => state.userlist.watchMovie
+    (state: unknown | any) => state.Login.user.watched
   );
+
   const dispatch = useDispatch();
 
   const handleWishAddRemove = useCallback((movie: Object | any) => {
     setWishMovie(movie);
     setClick((pre) => !pre);
-    dispatch(AddRemoveMovieWish(movie));
 
     return;
   }, []);
   const handleWatchAddRemove = useCallback((moviex: Object | any) => {
     setWatchedMovie(moviex);
     setClickx((pre) => !pre);
-    dispatch(AddRemoveMovieWatch(moviex));
 
     return;
   }, []);
@@ -48,11 +44,11 @@ export default function WishAndWatchBtn(props: any) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWish`, {
           wishMovie: wishMovie,
-          id: user?._id,
+          id: user,
         })
         .then((res) => {
           if (res.data.state) {
-            localStorage.setItem("user", JSON.stringify(res.data.data));
+            dispatch(userData(res.data.data));
             dispatch(setMessage(res.data));
             dispatch(setOpen(true));
           } else {
@@ -72,11 +68,11 @@ export default function WishAndWatchBtn(props: any) {
       axios
         .put(`${process.env.REACT_APP_SERVER_DOMAIN}/AddRemoveWatch`, {
           watchedMovie: watchedMovie,
-          id: user?._id,
+          id: user,
         })
         .then((res) => {
           if (res.data.state) {
-            localStorage.setItem("user", JSON.stringify(res.data.data));
+            dispatch(userData(res.data.data));
             dispatch(setMessage(res.data));
             dispatch(setOpen(true));
           } else {

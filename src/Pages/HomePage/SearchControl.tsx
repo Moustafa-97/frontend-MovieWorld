@@ -11,7 +11,6 @@ export default function SearchControl() {
   const page = useSelector((state: any) => state.userlist.page);
 
   const search = useParams();
-  // const search: any = JSON.parse(searchType);
 
   useEffect(() => {
     axios

@@ -22,6 +22,7 @@ import styled from "styled-components";
 import { InputBase } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../redux/reduxTools/WishlistandWatchlist";
+import { userData } from "../redux/reduxTools/HandleUserLogin";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -95,10 +96,17 @@ export default function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const isLoged = localStorage.getItem("user");
 
   const pages = ["Home", "Discover", "Popular", "Top"];
-  const WishN = useSelector((state: any) => state.userlist.wishnumber);
-  const WatchN = useSelector((state: any) => state.userlist.watchnumber);
+  // const User = useSelector((state: any) => state.Login.user);
+
+  const WishN = useSelector((state: any) =>
+    isLoged ? state.Login.user.wishlist?.length : 0
+  );
+  const WatchN = useSelector((state: any) =>
+    isLoged ? state.Login.user.watched?.length : 0
+  );
   const settings = [
     "Profile",
     `Watched ${WatchN}`,
@@ -107,14 +115,16 @@ export default function Navbar() {
   ];
   // end MUI
 
-  const localUser: any = localStorage.getItem("user");
-  const logedUser = JSON.parse(localUser);
+  const profilePic = useSelector(
+    (state: string | any | null) => state.Login.user.image
+  );
   const [search, setSearch] = useState(String);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     navigate(`Search/${search}`);
   };
   const handleLogout = (e: any) => {
     localStorage.removeItem("user");
+    dispatch(userData({}));
     dispatch(Logout(e));
   };
 
@@ -262,7 +272,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src={logedUser ? logedUser.image : ""} />
+                <Avatar src={profilePic ? profilePic : ""} />
               </IconButton>
             </Tooltip>
             <Menu

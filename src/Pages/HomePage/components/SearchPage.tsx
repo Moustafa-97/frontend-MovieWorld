@@ -25,10 +25,7 @@ export default function SearchPage(props: any) {
               >
                 <div className="" key={Math.random()}>
                   <div key={Math.random()} className="relative">
-                    {/* card */}
                     <Card movie={movie} />
-                    {/* buttons */}
-                    <WishAndWatchBtn movie={movie} />
                   </div>
                 </div>
               </div>

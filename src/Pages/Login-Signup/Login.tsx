@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginHandler } from "../redux/reduxTools/WishlistandWatchlist";
 import { useDispatch } from "react-redux";
+import { userData } from "../redux/reduxTools/HandleUserLogin";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function Login() {
         .post(
           `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
           { user: userLogin },
-          // { withCredentials: true }
+          // { withCredentials: true },
           // cookies::
           {
             headers: {
@@ -57,7 +58,7 @@ export default function Login() {
           }
         )
         .then(async (res: any) => {
-          dispatch(LoginHandler(res))
+          dispatch(LoginHandler(res));
           setLoginres(await res.data);
           setSnackOpen(true);
         })
@@ -68,7 +69,8 @@ export default function Login() {
   };
   useEffect(() => {
     if (loginresp.status) {
-      localStorage.setItem("user", JSON.stringify(loginresp.user));
+      dispatch(userData(loginresp.user));
+      localStorage.setItem("user", JSON.stringify(loginresp.user._id));
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 2000);

@@ -50,10 +50,7 @@ export default function SwipeCards(props: unknown[] | any) {
                 >
                   <div key={Math.random()}>
                     <div key={Math.random()} className="relative">
-                      {/* card */}
                       <Card movie={movie} />
-                      {/* buttons */}
-                      <WishAndWatchBtn movie={movie} />
                     </div>
                   </div>
                 </div>

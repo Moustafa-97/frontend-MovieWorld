@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Box, styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
@@ -17,24 +18,6 @@ import Link from "@mui/material/Link";
 import axios from "axios";
 import { imageToPage64 } from "../../assign/imagetopage64";
 import { useNavigate } from "react-router-dom";
-
-// const Input = React.forwardRef(function CustomInput(
-//   props: InputProps,
-//   ref: React.ForwardedRef<HTMLDivElement>
-// ) {
-//   const { slots, ...other } = props;
-//   return (
-//     <BaseInput
-//       slots={{
-//         root: InputRoot,
-//         input: InputElement,
-//         ...slots,
-//       }}
-//       {...other}
-//       ref={ref}
-//     />
-//   );
-// });
 
 export default function Signup() {
   const navigate = useNavigate();

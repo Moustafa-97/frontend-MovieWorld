@@ -23,10 +23,7 @@ export default function WishWatchPage(props: any) {
               >
                 <div className="" key={Math.random()}>
                   <div key={Math.random()} className="relative">
-                    {/* card */}
                     <Card movie={movie} />
-                    {/* buttons */}
-                    <WishAndWatchBtn movie={movie} />
                   </div>
                 </div>
               </div>
