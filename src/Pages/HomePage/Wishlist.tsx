@@ -11,7 +11,7 @@ import WishWatchPage from "./components/WishWatchPage";
 export default function Wishlist() {
   const [movies, setMovies] = useState(Array);
   const wished = useSelector(
-    (state: unknown | any) => state.userlist.wishMovie
+    (state: unknown | any) => state.Login.user.wishMovie
   );
 
   useEffect(() => {
@@ -21,7 +21,9 @@ export default function Wishlist() {
       Promise.all(
         wished.map((id: any) =>
           axios
-            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Wishlist`, { IDs: id })
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/Wishlist`, {
+              IDs: id,
+            })
             .then((res) => {
               return res.data.thisMovie;
             })

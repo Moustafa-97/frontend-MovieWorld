@@ -36,7 +36,7 @@ export default function SinglePage(props: any) {
           props.movies.map((movie: any) => (
             <div
               key={Math.random()}
-              className="container bg-slate-100 dark:bg-black cont-item lg:w-1/3 sm:w-full p-3 shadow-md rounded-md z-10"
+              className="container bg-slate-400 dark:bg-black cont-item lg:w-1/3 sm:w-full p-3 shadow-md rounded-md z-10"
             >
               <div key={Math.random()}>
                 <div key={Math.random()} className="relative">

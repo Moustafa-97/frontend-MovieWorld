@@ -6,7 +6,6 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 // import required modules
 import SnackbarSection from "./snackbar/SnackbarSection";
-import WishAndWatchBtn from "./buttons/WishAndWatchBtn";
 import Card from "./card/Card";
 
 export default function WishWatchPage(props: any) {
