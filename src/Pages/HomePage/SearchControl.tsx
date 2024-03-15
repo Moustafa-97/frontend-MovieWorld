@@ -21,6 +21,8 @@ export default function SearchControl() {
       .then((res) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setMovies(res.data.results);
+        console.log(res.data.results);
+        
       })
       .catch((err) => console.log(err));
   }, [page]);

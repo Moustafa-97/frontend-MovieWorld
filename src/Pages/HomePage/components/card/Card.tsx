@@ -2,6 +2,7 @@ import React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import WishAndWatchBtn from "../buttons/WishAndWatchBtn";
+import { Avatar } from "@mui/material";
 
 export default function Card(props: object | any) {
   const navigate = useNavigate();
@@ -35,10 +36,12 @@ export default function Card(props: object | any) {
             className=" text-xs font-light text-start ms-2 text-slate-50 dark:text-slate-400"
             key={Math.random()}
           >
-            {props.movie.overview.slice(0, 60) + "..."}
+            {props.movie.overview
+              ? props.movie.overview.slice(0, 60) + "..."
+              : null}
           </p>
           <p
-            className="absolute text-black dark:text-slate-300 dark:bg-black bg-white top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
+            className="absolute text-black dark:text-slate-300 dark:bg-black bg-slate-400 top-4 left-2  rounded-md px-1 text-xs flex gap-1 items-center justify-center"
             key={Math.random()}
           >
             <FaRegStar />

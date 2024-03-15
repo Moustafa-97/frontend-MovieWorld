@@ -7,7 +7,6 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 // import required modules
-import WishAndWatchBtn from "./buttons/WishAndWatchBtn";
 import SnackbarSection from "./snackbar/SnackbarSection";
 import Card from "./card/Card";
 
