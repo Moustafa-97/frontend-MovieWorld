@@ -20,8 +20,6 @@ import SnackbarSection from "./snackbar/SnackbarSection";
 import Card from "./card/Card";
 
 export default function SinglePage(props: any) {
-  const navigate = useNavigate();
-
   const page = useSelector((state: any) => state.userlist.page);
 
   const dispatch = useDispatch();
