@@ -11,7 +11,7 @@ import WishWatchPage from "./components/WishWatchPage";
 export default function Wishlist() {
   const [movies, setMovies] = useState(Array);
   const wished = useSelector(
-    (state: unknown | any) => state.Login.user.wishMovie
+    (state: unknown | any) => state.Login.user.wishlist
   );
 
   useEffect(() => {

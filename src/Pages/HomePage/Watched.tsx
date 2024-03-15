@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 export default function Watched() {
   const [movies, setMovies] = useState(Array);
   const watched = useSelector(
-    (state: unknown | any) => state.Login.user.watchMovie
+    (state: unknown | any) => state.Login.user.watched
   );
 
   useEffect(() => {
